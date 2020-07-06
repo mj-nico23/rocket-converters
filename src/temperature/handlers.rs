@@ -1,4 +1,5 @@
 use rocket_contrib::templates::Template;
+use rocket::response::Redirect;
 
 #[derive(Serialize)]
 struct TemplateResult {
@@ -8,10 +9,15 @@ struct TemplateResult {
     result: f32,
 }
 
+#[get("/")]
+pub fn index() -> Template {
+    Template::render("temperature/index", ())
+}
+
 #[get("/celsius/<c>")]
 pub fn celsius(c: f32) -> Template {
     Template::render(
-        "result",
+        "temperature/index",
         &TemplateResult {
             from: "celsius",
             to: "faherenheit",
@@ -45,6 +51,11 @@ pub fn fahrenheit(f: f32) -> Template {
             result: faherenheit_to_celsius(f),
         },
     )
+}
+
+#[get("/convert?<value>")]
+pub fn convert(value: f32) -> Redirect {
+    Redirect::to(format!("/temperature/celsius/{}", value))
 }
 
 fn celsius_to_faherenheit(c: f32) -> f32 {

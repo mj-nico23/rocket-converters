@@ -1,0 +1,27 @@
+{{#*inline "page"}}
+
+<div class="jumbotron">
+    <h1 class="display-4">Temperature Converters</h1>
+    <p class="lead">This is a simple temperature unit converter, here you could convert celsius, fahrenheit and kelvin
+        with each other.</p>
+</div>
+
+{{> temperature/options}}
+
+<form class="mt-3" action="/temperature/convert" method="GET">
+    <div class="row mb-2">
+        <div class="col">
+            <input name="value" type="text" class="form-control" placeholder="From value" value="{{value}}">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Convert</button>
+</form>
+
+<h2>
+    {{ result }}
+</h2>
+
+{{/inline}}
+
+
+{{~> layout~}}
