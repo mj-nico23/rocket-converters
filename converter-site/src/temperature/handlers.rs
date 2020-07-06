@@ -1,7 +1,7 @@
 use rocket_contrib::templates::Template;
 use rocket::response::Redirect;
 
-use multi_converter;
+use multi_converter::{Unit, Temperature};
 
 #[derive(Serialize)]
 struct TemplateResult {
@@ -24,7 +24,7 @@ pub fn celsius(c: f32) -> Template {
             from: "celsius",
             to: "faherenheit",
             value: c,
-            result: multi_converter::celsius_to_faherenheit(c),
+            result: Temperature::new(c, Unit::Celsius).convert(Unit::Faherenheit),
         },
     )
 }
@@ -37,7 +37,7 @@ pub fn celsius_kelvin(c: f32) -> Template {
             from: "celsius",
             to: "kelvin",
             value: c,
-            result: multi_converter::celsius_to_kelvin(c),
+            result: Temperature::new(c, Unit::Celsius).convert(Unit::Kelvin),
         },
     )
 }
@@ -50,7 +50,7 @@ pub fn fahrenheit(f: f32) -> Template {
             from: "faherenheit",
             to: "celsius",
             value: f,
-            result: multi_converter::faherenheit_to_celsius(f),
+            result: Temperature::new(f, Unit::Faherenheit).convert(Unit::Celsius),
         },
     )
 }
