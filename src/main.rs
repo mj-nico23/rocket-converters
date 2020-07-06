@@ -8,13 +8,12 @@ use rocket_contrib::templates::Template;
 mod temperature;
 
 fn main() {
-    let rocket = rocket::ignite()
+    rocket::ignite()
         .mount("/public", StaticFiles::from("public"))
         .mount("/", routes![index])
         .mount("/temperature", temperature::router::get_routes())
-        .attach(Template::fairing());
-
-    rocket.launch();
+        .attach(Template::fairing())
+        .launch();
 }
 
 #[get("/")]
