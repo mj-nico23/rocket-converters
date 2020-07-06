@@ -555,6 +555,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "multi-converter"
+version = "0.1.0"
+
+[[package]]
 name = "net2"
 version = "0.2.34"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -871,6 +875,7 @@ dependencies = [
 name = "rust-convert-site"
 version = "0.1.0"
 dependencies = [
+ "multi-converter",
  "rocket",
  "rocket_codegen",
  "rocket_contrib",

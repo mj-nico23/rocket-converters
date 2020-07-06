@@ -1,6 +1,8 @@
 use rocket_contrib::templates::Template;
 use rocket::response::Redirect;
 
+use multi_converter;
+
 #[derive(Serialize)]
 struct TemplateResult {
     from: &'static str,
@@ -22,7 +24,7 @@ pub fn celsius(c: f32) -> Template {
             from: "celsius",
             to: "faherenheit",
             value: c,
-            result: celsius_to_faherenheit(c),
+            result: multi_converter::celsius_to_faherenheit(c),
         },
     )
 }
@@ -35,7 +37,7 @@ pub fn celsius_kelvin(c: f32) -> Template {
             from: "celsius",
             to: "kelvin",
             value: c,
-            result: celsius_to_kelvin(c),
+            result: multi_converter::celsius_to_kelvin(c),
         },
     )
 }
@@ -48,7 +50,7 @@ pub fn fahrenheit(f: f32) -> Template {
             from: "faherenheit",
             to: "celsius",
             value: f,
-            result: faherenheit_to_celsius(f),
+            result: multi_converter::faherenheit_to_celsius(f),
         },
     )
 }
@@ -56,14 +58,4 @@ pub fn fahrenheit(f: f32) -> Template {
 #[get("/convert?<value>")]
 pub fn convert(value: f32) -> Redirect {
     Redirect::to(format!("/temperature/celsius/{}", value))
-}
-
-fn celsius_to_faherenheit(c: f32) -> f32 {
-    (c * 1.8) + 32.0
-}
-fn celsius_to_kelvin(c: f32) -> f32 {
-    c + 273.15
-}
-fn faherenheit_to_celsius(f: f32) -> f32 {
-    (f - 32.0) * 0.55
 }

@@ -7,9 +7,11 @@ use rocket_contrib::templates::Template;
 
 mod temperature;
 
+
+
 fn main() {
     rocket::ignite()
-        .mount("/public", StaticFiles::from("public"))
+        .mount("/public", StaticFiles::from("converter-site/public"))
         .mount("/", routes![index])
         .mount("/temperature", temperature::router::get_routes())
         .attach(Template::fairing())
