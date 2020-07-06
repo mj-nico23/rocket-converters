@@ -1,13 +1,10 @@
-use rocket;
 use crate::temperature::handlers;
+use rocket::Route;
 
-pub fn create_routes(){
-    rocket::ignite()
-        .mount("/temperature", routes![
-                handlers::celsius,
-                handlers::celsius_kelvin,
-                handlers::fahrenheit]
-        )
-        .launch();
+pub fn get_routes() -> Vec<Route> {
+    routes![
+        handlers::celsius,
+        handlers::celsius_kelvin,
+        handlers::fahrenheit
+    ]
 }
-
