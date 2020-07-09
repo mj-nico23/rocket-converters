@@ -7,6 +7,7 @@ pub fn get_routes() -> Vec<Route> {
         handlers::celsius,
         handlers::celsius_kelvin,
         handlers::fahrenheit,
+        handlers::metter,
         handlers::convert
     ]
 }
